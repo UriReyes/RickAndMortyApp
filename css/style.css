@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: mortyFont;
-  src: url(../resources/fonts/_adult_swim_font__by_esteveztheart-dbj9by8.ttf);
+  src: url(../resources/fonts/adult_swim_font__by_esteveztheart-dbj9by8.ttf);
 }
 :root {
   --color_primary: #14c359;
