@@ -55,26 +55,6 @@ interfaz.searcher.addEventListener("keyup", (key) => {
         }
         pages = response.info.pages;
         interfaz.noResults.style.display = "none";
-        // response.results.forEach((personaje) => {
-        //   // if (personaje.episode.length >= 1) {
-        //   //   let firstEpisode = personaje.episode[0];
-        //   //   let lastEpisode = personaje.episode[personaje.episode.length - 1];
-        //   //   api.getInfoEpisode(firstEpisode).then((firstEpisode) => {
-        //   //     api.getInfoEpisode(lastEpisode).then((lastEpisode) => {
-        //   //       const card = interfaz.getCard(
-        //   //         personaje.id,
-        //   //         personaje.image,
-        //   //         personaje.name,
-        //   //         personaje.species,
-        //   //         personaje.status,
-        //   //         firstEpisode.name,
-        //   //         lastEpisode.name,
-        //   //         personaje.url
-        //   //       );
-        //   //       interfaz.renderCard(card);
-        //   //     });
-        //   //   });
-        //   // }
         renderAllCards(response.results);
 
         let info2 = interfaz.getInfoPage(
