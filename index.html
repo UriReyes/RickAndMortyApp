@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick and Morty API</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
+  </head>
+  <body>
+    <header class="container">
+      <!-- <nav class="d-flex flex-end">
+        <a href="" class="btn btn-about">about</a>
+      </nav> -->
+      <img class="title" src="resources/images/titulo.gif" alt="Titulo APP" />
+      <div class="logo">
+        <img
+          class="title"
+          src="resources/images/backImage.gif"
+          alt="Titulo APP"
+        />
+      </div>
+      <div class="d-flex flex-center">
+        <a id="search" class="btn btn-start">Buscar</a>
+      </div>
+      <br />
+      <div id="form-search" class="d-flex flex-center">
+        <div class="gird">
+          <form id="form-searcher" action="" method="post">
+            <span class="lupa"> &#128269; </span>
+            <input
+              type="text"
+              name=""
+              id="searcher"
+              placeholder="Search"
+              autocomplete="off"
+            />
+            <span id="close-form">&times;</span>
+          </form>
+        </div>
+      </div>
+    </header>
+    <!-- Modal -->
+    <aside id="modal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <header class="header-modal d-flex flex-between">
+          <div class="space-header">
+            <h2 id="title-modal" class="title-modal">Not Found</h2>
+            <span class="close">x</span>
+          </div>
+        </header>
+        <hr class="separator" />
+        <main id="modal-content"></main>
+        <footer id="footer-modal"></footer>
+      </div>
+    </aside>
+    <!-- App -->
+    <div id="noResults" class="d-flex flex-center noResults"></div>
+    <div id="spinner" class="text-center">
+      <div class="lds-dual-ring"></div>
+      <br /><br />
+      <p class="charge">Cargando..</p>
+    </div>
+    <main id="content" class="container d-flex flex-center"></main>
+    <div id="errors" class="errors"></div>
+    <br />
+    <div id="info-page" class="info-page"></div>
+    <br />
+    <div id="pagination-all" class="pagination d-flex flex-center">
+      <a id="prev" class="btn">Anterior</a>
+      <a id="next" class="btn">Siguiente</a>
+    </div>
+    <div id="pagination-character" class="pagination d-flex flex-center">
+      <a id="prev-char" class="btn">Anterior</a>
+      <a id="next-char" class="btn">Siguiente</a>
+    </div>
+    <br />
+    <footer>
+      <center>
+        <h5>Power By Uricode&copy;</h5>
+        <br />
+      </center>
+    </footer>
+    <!-- Modal -->
+
+    <script src="jquery/jquery-3.5.1.min.js"></script>
+    <script src="app/app.js" type="module"></script>
+  </body>
+</html>

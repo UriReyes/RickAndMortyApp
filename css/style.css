@@ -1,0 +1,309 @@
+@font-face {
+  font-family: rickFont;
+  src: url(../resources/fonts/rick_and_morty_by_shittychan-d9h2vl6.ttf);
+}
+@font-face {
+  font-family: mortyFont;
+  src: url(../resources/fonts/_adult_swim_font__by_esteveztheart-dbj9by8.ttf);
+}
+:root {
+  --color_primary: #14c359;
+  --color_secondary: #2e2e2fc4;
+  --color_alternative: #8bec92;
+  --color_back: #101010;
+  --color_dead: #ff3030;
+}
+*,
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: var(--color_back);
+  font-family: mortyFont;
+  color: white;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+h1 {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+input,
+.lupa,
+#close-form {
+  text-transform: capitalize;
+  background-color: var(--color_back);
+  border: none;
+  border-bottom: solid 1px #14c359;
+  padding: 6px 3px;
+  color: white;
+}
+input:focus {
+  outline: none;
+}
+hr {
+  border: 1px solid #14c359;
+}
+.container {
+  padding: 2rem;
+}
+.badge {
+  background: #1279e2;
+  padding: 0 5px;
+  border-radius: 4px;
+}
+.badge-info {
+  background: #12e250;
+}
+.pb-2 {
+  padding-bottom: 2rem;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.flex-between {
+  justify-content: space-between;
+}
+.flex-center {
+  justify-content: center;
+}
+.flex-end {
+  justify-content: flex-end;
+}
+.text-center {
+  text-align: center;
+}
+.charge {
+  text-shadow: 0px 0px 12px #09c318;
+}
+.btn {
+  padding: 5px;
+  color: white;
+  font-family: rickFont;
+  cursor: pointer;
+  font-size: 20px;
+  border-width: 2px;
+  background: linear-gradient(to right, #14c359, var(--color_back)) left bottom
+    no-repeat;
+  background-size: 100% 2px; /* if linear-gradient, we need to resize it */
+}
+.btn-about {
+  font-size: 25px;
+}
+.btn-start {
+  font-size: 30px;
+}
+.btn:hover {
+  color: var(--color_alternative);
+}
+.card {
+  border-radius: 10px;
+  background-color: var(--color_secondary);
+  margin-top: 2rem;
+}
+.img-card {
+  border-radius: 10px 10px 0 0;
+  max-width: 100%;
+  max-height: 100%;
+}
+@media (min-width: 768px) and (max-width: 2000px) {
+  .img-card {
+    border-radius: 10px 10px 0 0;
+    width: 500px;
+    height: 500px;
+  }
+}
+.information {
+  padding: 5px 2rem;
+}
+.stast-life {
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  display: inline-block;
+  margin-right: 5px;
+}
+.alive {
+  background-color: var(--color_primary);
+}
+.dead {
+  background-color: var(--color_dead);
+}
+.info-page {
+  text-align: center;
+}
+.info-page-text {
+  font-size: 12px;
+}
+#noResults {
+  display: none;
+}
+.noResults {
+  background-color: var(--color_dead);
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  padding: 5px;
+  box-shadow: -1px -1px 20px 2px var(--color_dead);
+}
+.errors {
+  display: none;
+  background-color: var(--color_dead);
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  padding: 5px;
+  box-shadow: -1px -1px 20px 2px var(--color_dead);
+}
+#close-form:hover {
+  cursor: pointer;
+  color: var(--color_primary);
+  font-size: 18px;
+}
+#form-search {
+  display: none;
+}
+#pagination-character {
+  display: none;
+}
+p.episode {
+  color: #a7a7a7;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 1rem;
+  margin-bottom: 10px;
+}
+h5.name-episode {
+  font-size: 16px;
+}
+/*SPINNER*/
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.episodes_rick {
+  display: none;
+  margin-left: 15px;
+  margin-right: 50px;
+  border-top: solid 2px #2f8dd0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+/* Modal */
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.829); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: relative;
+  background-color: #222222;
+  margin: auto;
+  padding-top: 1rem;
+
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.897),
+    0 6px 20px 0 rgba(0, 0, 0, 0.877);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  border-radius: 8px;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: rickFont;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--color_primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.title-modal {
+  font-family: rickFont;
+  font-size: 30px;
+}
+.space-header {
+  padding: 0 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.space {
+  padding: 1rem 1rem;
+  width: 100%;
+  overflow-y: auto;
+  height: 200px;
+}
