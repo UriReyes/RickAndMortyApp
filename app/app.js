@@ -55,27 +55,28 @@ interfaz.searcher.addEventListener("keyup", (key) => {
         }
         pages = response.info.pages;
         interfaz.noResults.style.display = "none";
-        response.results.forEach((personaje) => {
-          if (personaje.episode.length >= 1) {
-            let firstEpisode = personaje.episode[0];
-            let lastEpisode = personaje.episode[personaje.episode.length - 1];
-            api.getInfoEpisode(firstEpisode).then((firstEpisode) => {
-              api.getInfoEpisode(lastEpisode).then((lastEpisode) => {
-                const card = interfaz.getCard(
-                  personaje.id,
-                  personaje.image,
-                  personaje.name,
-                  personaje.species,
-                  personaje.status,
-                  firstEpisode.name,
-                  lastEpisode.name,
-                  personaje.url
-                );
-                interfaz.renderCard(card);
-              });
-            });
-          }
-        });
+        // response.results.forEach((personaje) => {
+        //   // if (personaje.episode.length >= 1) {
+        //   //   let firstEpisode = personaje.episode[0];
+        //   //   let lastEpisode = personaje.episode[personaje.episode.length - 1];
+        //   //   api.getInfoEpisode(firstEpisode).then((firstEpisode) => {
+        //   //     api.getInfoEpisode(lastEpisode).then((lastEpisode) => {
+        //   //       const card = interfaz.getCard(
+        //   //         personaje.id,
+        //   //         personaje.image,
+        //   //         personaje.name,
+        //   //         personaje.species,
+        //   //         personaje.status,
+        //   //         firstEpisode.name,
+        //   //         lastEpisode.name,
+        //   //         personaje.url
+        //   //       );
+        //   //       interfaz.renderCard(card);
+        //   //     });
+        //   //   });
+        //   // }
+        renderAllCards(response.results);
+
         let info2 = interfaz.getInfoPage(
           1,
           response.info.count,
@@ -98,77 +99,81 @@ function showCharacters(url) {
     interfaz.spinner("none");
   }, 1000);
   api.getCharacters(url).then((response) => {
-    response.forEach((personaje) => {
-      if (personaje.episode.length >= 1) {
-        let firstEpisode = personaje.episode[0];
-        let lastEpisode = personaje.episode[personaje.episode.length - 1];
-        api.getInfoEpisode(firstEpisode).then((firstEpisode) => {
-          api.getInfoEpisode(lastEpisode).then((lastEpisode) => {
-            const card = interfaz.getCard(
-              personaje.id,
-              personaje.image,
-              personaje.name,
-              personaje.species,
-              personaje.status,
-              firstEpisode.name,
-              lastEpisode.name,
-              personaje.url
-            );
-            interfaz.renderCard(card);
-            document.querySelectorAll(".card").forEach((item) => {
-              item.addEventListener("click", function (e) {
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                let urlCharacter = item.getAttribute("urlCharacter");
-                api.getCharacter(urlCharacter).then((response) => {
-                  interfaz.modal.style.display = "block";
-                  interfaz.closeModal.onclick = function () {
-                    interfaz.modal.style.display = "none";
-                  };
-                  // Modal
-                  interfaz.contentModal.innerHTML = "";
-                  interfaz.titleModal.innerText = response.name;
-                  let img = document.createElement("img");
-                  img.src = response.image;
-                  interfaz.contentModal.appendChild(img);
-                  let content = document.createElement("div");
-                  let contentEpisodes = document.createElement("div");
-                  contentEpisodes.classList.add("episodes_rick");
-                  content.classList.add("space");
-                  content.innerHTML = `
-                  <strong class="badge">Information: </strong>
-                  <br><br>
-                  <p>&lesdot; Created: ${response.created}</p>
-                  <p>&lesdot; Location: ${response.location.name}</p>
-                  <p>&lesdot; Gender: ${response.gender}</p>
-                  <p>&lesdot; Origin: ${response.origin.name}</p>
-                  <p>&lesdot; Specie: ${response.species}</p>`;
-                  if (response.status == "Alive") {
-                    content.innerHTML += `
-                    <p>&lesdot; Status: ${response.status} <span class="stast-life alive"></span></p>`;
-                  } else {
-                    content.innerHTML += `
-                    <p>&lesdot; Status: ${response.status} <span class="stast-life dead"></span></p>`;
-                  }
-                  let btnEpisodes = `<p id="episode"> &lesdot; Episodes: <span class="badge">${response.episode.length}</span></p>`;
-                  content.innerHTML += btnEpisodes;
-                  interfaz.contentModal.appendChild(content);
-                  const boton = $("#episode");
-                  response.episode.forEach((element) => {
-                    api.getInfoEpisode(element).then((response) => {
-                      contentEpisodes.innerHTML += `<p>&lrtri; ${response.name}</p>`;
-                    });
+    renderAllCards(response);
+  });
+}
+
+function renderAllCards(response) {
+  response.forEach((personaje) => {
+    if (personaje.episode.length >= 1) {
+      let firstEpisode = personaje.episode[0];
+      let lastEpisode = personaje.episode[personaje.episode.length - 1];
+      api.getInfoEpisode(firstEpisode).then((firstEpisode) => {
+        api.getInfoEpisode(lastEpisode).then((lastEpisode) => {
+          const card = interfaz.getCard(
+            personaje.id,
+            personaje.image,
+            personaje.name,
+            personaje.species,
+            personaje.status,
+            firstEpisode.name,
+            lastEpisode.name,
+            personaje.url
+          );
+          interfaz.renderCard(card);
+          document.querySelectorAll(".card").forEach((item) => {
+            item.addEventListener("click", function (e) {
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              let urlCharacter = item.getAttribute("urlCharacter");
+              api.getCharacter(urlCharacter).then((response) => {
+                interfaz.modal.style.display = "block";
+                interfaz.closeModal.onclick = function () {
+                  interfaz.modal.style.display = "none";
+                };
+                // Modal
+                interfaz.contentModal.innerHTML = "";
+                interfaz.titleModal.innerText = response.name;
+                let img = document.createElement("img");
+                img.src = response.image;
+                interfaz.contentModal.appendChild(img);
+                let content = document.createElement("div");
+                let contentEpisodes = document.createElement("div");
+                contentEpisodes.classList.add("episodes_rick");
+                content.classList.add("space");
+                content.innerHTML = `
+                <strong class="badge">Information: </strong>
+                <br><br>
+                <p>&lesdot; Created: ${response.created}</p>
+                <p>&lesdot; Location: ${response.location.name}</p>
+                <p>&lesdot; Gender: ${response.gender}</p>
+                <p>&lesdot; Origin: ${response.origin.name}</p>
+                <p>&lesdot; Specie: ${response.species}</p>`;
+                if (response.status == "Alive") {
+                  content.innerHTML += `
+                  <p>&lesdot; Status: ${response.status} <span class="stast-life alive"></span></p>`;
+                } else {
+                  content.innerHTML += `
+                  <p>&lesdot; Status: ${response.status} <span class="stast-life dead"></span></p>`;
+                }
+                let btnEpisodes = `<p id="episode"> &lesdot; Episodes: <span class="badge">${response.episode.length}</span></p>`;
+                content.innerHTML += btnEpisodes;
+                interfaz.contentModal.appendChild(content);
+                const boton = $("#episode");
+                response.episode.forEach((element) => {
+                  api.getInfoEpisode(element).then((response) => {
+                    contentEpisodes.innerHTML += `<p>&lrtri; ${response.name}</p>`;
                   });
-                  $(boton).click(function () {
-                    $(content.appendChild(contentEpisodes)).slideToggle();
-                  });
+                });
+                $(boton).click(function () {
+                  $(content.appendChild(contentEpisodes)).slideToggle();
                 });
               });
             });
           });
         });
-      }
-    });
+      });
+    }
   });
 }
 
