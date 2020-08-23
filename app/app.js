@@ -115,6 +115,7 @@ function renderAllCards(response) {
                 interfaz.contentModal.innerHTML = "";
                 interfaz.titleModal.innerText = response.name;
                 let img = document.createElement("img");
+                img.classList.add("img-modal");
                 img.src = response.image;
                 interfaz.contentModal.appendChild(img);
                 let content = document.createElement("div");
